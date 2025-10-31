@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Center(
                   child: Text("Get Started with", style: theme_data.titleLarge),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 30),
                 Form(
                   key: _formKey,
                   child: Column(
@@ -49,16 +49,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 30),
                 ElevatedButton(
                   onPressed: () {},
                   child: Icon(Icons.arrow_circle_right_outlined),
                 ),
                 const SizedBox(height: 70),
                 Center(
-                  child: Text(
-                    "Forgot Password",
-                    style: TextStyle(color: Colors.grey),
+                  child: InkWell(
+                    onTap: ()=>context.goNamed(AppRouter.forgotScreen),
+                    child: Text(
+                      "Forgot Password",
+                      style: TextStyle(color: Colors.grey),
+                    ),
                   ),
                 ),
                 Row(

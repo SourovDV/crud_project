@@ -3,8 +3,20 @@ import 'package:crud_project/ui/weight/background_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _mobileController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -13,28 +25,51 @@ class SignUpPage extends StatelessWidget {
       body: BackgroundImage(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(40.0),
             child: Column(
               children: [
                 const SizedBox(height: 100),
-                Center(child: Text("Join With Us", style: theme_data.titleLarge)),
+                Center(
+                  child: Text("Join With Us", style: theme_data.titleLarge),
+                ),
                 const SizedBox(height: 24),
-              Form(child: Column(
-                children: [
-                  TextFormField(decoration: InputDecoration(hintText: "Email")),
-                  SizedBox(height: 10,),
-                  TextFormField(decoration: InputDecoration(hintText: "First Name")),
-                  SizedBox(height: 10,),
-                  TextFormField(decoration: InputDecoration(hintText: "Last Name")),
-                  SizedBox(height: 10,),
-                  TextFormField(decoration: InputDecoration(hintText: "Mobile")),
-                  SizedBox(height: 10,),
-                  TextFormField(decoration: InputDecoration(hintText: "Password")),
-                  SizedBox(height: 30,),
-                  ElevatedButton(onPressed: (){}, child:Icon(Icons.arrow_circle_right_outlined))
-                ],
-              )),
-                SizedBox(height: 50,),
+                Form(
+                  child: Column(
+                    key: _formKey,
+                    children: [
+                      TextFormField(
+                        decoration: InputDecoration(hintText: "Email"),
+                        controller: _emailController,
+                      ),
+                      SizedBox(height: 10),
+                      TextFormField(
+                        decoration: InputDecoration(hintText: "First Name"),
+                        controller: _firstNameController,
+                      ),
+                      SizedBox(height: 10),
+                      TextFormField(
+                        decoration: InputDecoration(hintText: "Last Name"),
+                        controller: _lastNameController,
+                      ),
+                      SizedBox(height: 10),
+                      TextFormField(
+                        decoration: InputDecoration(hintText: "Mobile"),
+                        controller: _mobileController,
+                      ),
+                      SizedBox(height: 10),
+                      TextFormField(
+                        decoration: InputDecoration(hintText: "Password"),
+                        controller: _passwordController,
+                      ),
+                      SizedBox(height: 30),
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: Icon(Icons.arrow_circle_right_outlined),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 50),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -42,7 +77,7 @@ class SignUpPage extends StatelessWidget {
                     InkWell(
                       onTap: () => context.goNamed(AppRouter.homeScreen),
                       child: Text(
-                        "Sign up",
+                        "Sign In",
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -51,12 +86,21 @@ class SignUpPage extends StatelessWidget {
                     ),
                   ],
                 ),
-
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _mobileController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 }
