@@ -1,20 +1,20 @@
 import 'package:crud_project/routers/app_router.dart';
-import 'package:crud_project/ui/utils/app_color.dart';
 import 'package:crud_project/ui/weight/background_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
-class ForgotEmailVerificationScreen extends StatefulWidget {
-  ForgotEmailVerificationScreen({super.key});
+class ForgotPinVerification extends StatefulWidget {
+  ForgotPinVerification({super.key});
 
   @override
-  State<ForgotEmailVerificationScreen> createState() => _HomeScreenState();
+  State<ForgotPinVerification> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<ForgotEmailVerificationScreen> {
-
-  final TextEditingController _emailController = TextEditingController();
+class _HomeScreenState extends State<ForgotPinVerification> {
+  final TextEditingController _pinController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final theme_data = Theme.of(context).textTheme;
@@ -29,20 +29,40 @@ class _HomeScreenState extends State<ForgotEmailVerificationScreen> {
                 Center(
                   child: Column(
                     children: [
-                      Text("Your Email Address", style: theme_data.titleLarge),
-                      Text("A 6 digit verifiaction pin will send your email"),
+                      Text("Pin Verification", style: theme_data.titleLarge),
+                      Text("A 6 digit verifiaction pin has been send"),
                     ],
-                  )
+                  ),
                 ),
                 const SizedBox(height: 24),
                 Form(
                   key: _formKey,
                   child: Column(
                     children: [
-                      TextFormField(
-                        controller: _emailController,
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(hintText: "Email"),
+                      PinCodeTextField(
+                        length: 6,
+                        appContext: context,
+                        keyboardType: TextInputType.number,
+
+                        pinTheme: PinTheme(
+                          shape: PinCodeFieldShape.box,
+                          borderRadius: BorderRadius.circular(8),
+                          fieldHeight: 55,
+                          fieldWidth: 50,
+
+                          activeColor: Colors.green,
+                          // Active border
+                          selectedColor: Colors.green,
+                          // On focus
+                          inactiveColor: Colors.red,
+                          // Inactive border
+                          borderWidth: 2, // Make border visible
+                        ),
+                        enableActiveFill: false,
+                        // Important!
+                        onCompleted: (value) {
+                          print(value);
+                        },
                       ),
                     ],
                   ),
@@ -50,7 +70,7 @@ class _HomeScreenState extends State<ForgotEmailVerificationScreen> {
                 const SizedBox(height: 15),
                 ElevatedButton(
                   onPressed: () {
-                    context.goNamed(AppRouter.pinVerification);
+                    context.goNamed(AppRouter.setPassword);
                   },
                   child: Icon(Icons.arrow_circle_right_outlined),
                 ),
@@ -58,7 +78,7 @@ class _HomeScreenState extends State<ForgotEmailVerificationScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Have an accound? "),
+                    Text("Have an accounds? "),
                     InkWell(
                       onTap: () => context.goNamed(AppRouter.homeScreen),
                       child: Text(
@@ -77,11 +97,11 @@ class _HomeScreenState extends State<ForgotEmailVerificationScreen> {
         ),
       ),
     );
-
   }
+
   @override
   void dispose() {
-    _emailController.dispose();
+    _pinController.dispose();
     super.dispose();
   }
 }

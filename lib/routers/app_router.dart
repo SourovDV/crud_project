@@ -4,4 +4,7 @@ class AppRouter{
   static final String signUpScreen = '/sign_screen';
   static final String loginScreen = '/login_screen';
   static final String forgotScreen = '/forgot_screen';
+  static final String pinVerification ='/pin_verification';
+  static final String setPassword = '/set_password';
+  static final String homePageOne = '/home_page_one';
 }
