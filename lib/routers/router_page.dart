@@ -11,6 +11,11 @@ class RouterPage {
         name: AppRouter.splashScreen,
         builder: (context, state) => SplashScreen(),
       ),
+      GoRoute(
+        path: AppRouter.homeScreen,
+        name: AppRouter.homeScreen,
+        builder: (context, state) => HomeScreen(),
+      ),
     ],
   );
 }
