@@ -1,4 +1,6 @@
 import 'package:crud_project/routers/app_router.dart';
+import 'package:crud_project/ui/screen/add_new_task.dart';
+import 'package:crud_project/ui/screen/bottom_home_task.dart';
 import 'package:crud_project/ui/screen/forgot_email_verification_screen.dart';
 import 'package:crud_project/ui/screen/forgot_pin_verification.dart';
 import 'package:crud_project/ui/screen/home_page_one.dart';
@@ -45,6 +47,16 @@ class RouterPage {
         path: AppRouter.homePageOne,
         name: AppRouter.homePageOne,
         builder: (context, state) => HomePageOne(),
+      ),
+      GoRoute(
+        path: AppRouter.bottomHomeTask,
+        name: AppRouter.bottomHomeTask,
+        builder: (context, state) => BottomHomeTask(),
+      ),
+      GoRoute(
+        path: AppRouter.addNesTask,
+        name: AppRouter.addNesTask,
+        builder: (context, state) => AddNewTask(),
       ),
     ],
   );

@@ -51,7 +51,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 30),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.goNamed(AppRouter.homePageOne);
+                  },
                   child: Icon(Icons.arrow_circle_right_outlined),
                 ),
                 const SizedBox(height: 70),
