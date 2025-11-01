@@ -1,4 +1,8 @@
 import 'package:crud_project/ui/screen/add_new_task.dart';
+import 'package:crud_project/ui/screen/bottom_home_task.dart';
+import 'package:crud_project/ui/screen/cancel_task.dart';
+import 'package:crud_project/ui/screen/completed_task.dart';
+import 'package:crud_project/ui/screen/progress_task.dart';
 import 'package:flutter/material.dart';
 
 class HomePageOne extends StatefulWidget {
@@ -12,10 +16,10 @@ class _HomePageOneState extends State<HomePageOne> {
 
   int _selectedIndex = 0;
   List<Widget> _screen = const [
-      AddNewTask(),
-      AddNewTask(),
-      AddNewTask(),
-      AddNewTask(),
+      BottomHomeTask(),
+      ProgressTask(),
+      CancelTask(),
+      CompletedTask(),
   ] ;
 
   @override
