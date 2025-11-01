@@ -28,7 +28,7 @@ class _HomeScreenState extends State<SetPassword> {
               children: [
                 const SizedBox(height: 250),
                 Center(
-                  child: Text("Set Passdffffsddsfdddddddddsfssdfdsdsfsffsdfsdfsdfffffffffffffffffffffffffffffffffffsword", style: theme_data.titleLarge),
+                  child: Text("Set Passdffffsddsfdddddddddssdsdfdssdfdsffssdfdsdsfsffsdfsdfsdfffffffffffffffffffffffffffffffffffsword", style: theme_data.titleLarge),
                 ),
                 const SizedBox(height: 30),
                 Form(
