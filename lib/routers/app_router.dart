@@ -9,4 +9,5 @@ class AppRouter{
   static final String homePageOne = '/home_page_one';
   static final String bottomHomeTask = '/bottom_home_task';
   static final String addNesTask = '/add_new_task';
+  static final String profile = '/profile';
 }

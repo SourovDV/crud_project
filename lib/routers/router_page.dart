@@ -8,6 +8,7 @@ import 'package:crud_project/ui/screen/set_password.dart';
 import 'package:crud_project/ui/screen/sign_in.dart';
 import 'package:crud_project/ui/screen/sign_up_page.dart';
 import 'package:crud_project/ui/screen/splash_screen.dart';
+import 'package:crud_project/ui/screen/update_profile.dart';
 import 'package:go_router/go_router.dart';
 
 class RouterPage {
@@ -57,6 +58,11 @@ class RouterPage {
         path: AppRouter.addNesTask,
         name: AppRouter.addNesTask,
         builder: (context, state) => AddNewTask(),
+      ),
+      GoRoute(
+        path: AppRouter.profile,
+        name: AppRouter.profile,
+        builder: (context, state) => UpdateProfile(),
       ),
     ],
   );
