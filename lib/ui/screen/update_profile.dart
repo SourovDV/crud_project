@@ -121,11 +121,11 @@ class _HomeScreenState extends State<UpdateProfile> {
       height: 50,
       child: Row(
         children: [
-          Container(
-            child: Center(
+           Container(
+            child: const Center(
               child: Text("Photo", style: TextStyle(color: Colors.white)),
             ),
-            decoration: BoxDecoration(
+            decoration:const BoxDecoration(
               color: Colors.grey,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10),
