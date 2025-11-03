@@ -35,7 +35,7 @@ class TaskManagerApp extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8)
               ),
               fixedSize: Size.fromWidth(double.maxFinite),
-              padding: EdgeInsets.symmetric(vertical: 20),
+              padding: EdgeInsets.symmetric(vertical: 10),
               foregroundColor: Colors.white,
               textStyle: TextStyle(
                 fontSize: 20,

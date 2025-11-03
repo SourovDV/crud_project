@@ -1,5 +1,8 @@
+import 'package:crud_project/data/services/network_caller.dart';
+import 'package:crud_project/data/utils/url_path.dart';
 import 'package:crud_project/routers/app_router.dart';
 import 'package:crud_project/ui/weight/background_image.dart';
+import 'package:crud_project/ui/weight/snackbar_weight.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,6 +20,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _mobileController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +66,17 @@ class _SignUpPageState extends State<SignUpPage> {
                         controller: _passwordController,
                       ),
                       SizedBox(height: 30),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: Icon(Icons.arrow_circle_right_outlined),
+                      Visibility(
+                        visible: isLoading==false,
+                        replacement:Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            _regestationButton();
+                          },
+                          child: Icon(Icons.arrow_circle_right_outlined),
+                        ),
                       ),
                     ],
                   ),
@@ -92,6 +104,41 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
+  }
+
+  void _regestationButton(){
+    _regestationApi();
+  }
+
+  Future<void> _regestationApi() async{
+    isLoading = true;
+    final Map<String,dynamic> bodyrespons = {
+
+      "email":_emailController.text.trim(),
+      "firstName":_firstNameController.text.trim(),
+      "lastName":_lastNameController.text.trim(),
+      "mobile":_mobileController.text.trim(),
+      "password":_passwordController.text,
+      "photo":""
+
+    };
+    final NetworkRespons respons = await NetworkCaller.postRespons(url: UrlPath.registerUrl,body: bodyrespons);
+    isLoading = false;
+    if(respons.isSucess){
+      _clearTextField();
+     showSnackbar(context, "New User Regestation Sucessfull");
+    }else{
+      showSnackbar(context, respons.errorMessage);
+    }
+  }
+
+
+  void _clearTextField(){
+    _emailController.clear();
+    _firstNameController.clear();
+    _lastNameController.clear();
+    _mobileController.clear();
+    _passwordController.clear();
   }
 
   @override
