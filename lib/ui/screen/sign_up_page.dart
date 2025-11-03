@@ -38,32 +38,75 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 const SizedBox(height: 24),
                 Form(
-                  child: Column(
                     key: _formKey,
+                  child: Column(
                     children: [
                       TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         decoration: InputDecoration(hintText: "Email"),
                         controller: _emailController,
+                        validator: (value){
+                          if(value == null || value.isEmpty){
+                              return "Email is required";
+                          }else if (!value.contains('@')) {
+                            return 'Enter a valid email';
+                          }
+                          return null;
+                        },
                       ),
                       SizedBox(height: 10),
                       TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+
                         decoration: InputDecoration(hintText: "First Name"),
                         controller: _firstNameController,
+                        validator: (value){
+                          if(value == null || value.isEmpty){
+                            return "First name is required";
+                          }
+                          return null;
+                        },
                       ),
                       SizedBox(height: 10),
                       TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+
                         decoration: InputDecoration(hintText: "Last Name"),
                         controller: _lastNameController,
+                        validator: (value){
+                          if(value == null || value.isEmpty){
+                            return "Last name is required";
+                          }
+                          return null;
+                        },
                       ),
                       SizedBox(height: 10),
                       TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+
                         decoration: InputDecoration(hintText: "Mobile"),
                         controller: _mobileController,
+                        validator: (value){
+                          if(value == null || value.isEmpty){
+                            return "Mobile number is required";
+                          }
+                         else if(value.length <8){
+                           return "value must provided 8 charcter";
+                          }
+                        },
                       ),
                       SizedBox(height: 10),
                       TextFormField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+
                         decoration: InputDecoration(hintText: "Password"),
                         controller: _passwordController,
+                        validator: (value){
+                        if(value == null || value.isEmpty){
+                          return "Password is required";
+                        }
+                        return null;
+                      },
                       ),
                       SizedBox(height: 30),
                       Visibility(
@@ -107,11 +150,15 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void _regestationButton(){
-    _regestationApi();
+
+    if (_formKey.currentState!.validate()) {
+      _regestationApi();
+    }
   }
 
   Future<void> _regestationApi() async{
     isLoading = true;
+    setState(() {});
     final Map<String,dynamic> bodyrespons = {
 
       "email":_emailController.text.trim(),
@@ -124,6 +171,7 @@ class _SignUpPageState extends State<SignUpPage> {
     };
     final NetworkRespons respons = await NetworkCaller.postRespons(url: UrlPath.registerUrl,body: bodyrespons);
     isLoading = false;
+    setState(() {});
     if(respons.isSucess){
       _clearTextField();
      showSnackbar(context, "New User Regestation Sucessfull");
