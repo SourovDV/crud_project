@@ -1,4 +1,5 @@
 import 'package:crud_project/routers/app_router.dart';
+import 'package:crud_project/ui/controller/auth_controller.dart';
 import 'package:crud_project/ui/screen/sign_in.dart';
 import 'package:crud_project/ui/weight/app_logo.dart';
 import 'package:crud_project/ui/weight/background_image.dart';
@@ -22,7 +23,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> moveToNextPage()async{
     await Future.delayed(const Duration(seconds: 2));
-    context.goNamed(AppRouter.homeScreen);
+   bool token =await AuthController.getData();
+   if(token){
+     context.goNamed(AppRouter.homePageOne);
+   }else{
+     context.goNamed(AppRouter.homeScreen);
+   }
   }
 
   @override

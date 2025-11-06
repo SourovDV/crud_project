@@ -4,7 +4,6 @@ import 'package:http/http.dart';
 
 class NetworkRespons {
   final int statusCode;
-
   final bool isSucess;
   final String errorMessage;
   final Map<String, dynamic>? responsBody;

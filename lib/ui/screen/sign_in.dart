@@ -1,6 +1,8 @@
+import 'package:crud_project/data/models/user_model.dart';
 import 'package:crud_project/data/services/network_caller.dart';
 import 'package:crud_project/data/utils/url_path.dart';
 import 'package:crud_project/routers/app_router.dart';
+import 'package:crud_project/ui/controller/auth_controller.dart';
 import 'package:crud_project/ui/utils/app_color.dart';
 import 'package:crud_project/ui/weight/background_image.dart';
 import 'package:crud_project/ui/weight/snackbar_weight.dart';
@@ -131,6 +133,10 @@ class _HomeScreenState extends State<HomeScreen> {
     _loginProgress = false;
     setState(() {});
     if(respons.isSucess){
+      String token = respons.responsBody!["token"];
+      UserModel userModel = UserModel.formJson(respons.responsBody!["data"]);
+      await AuthController.saveData(token, userModel);
+
       context.goNamed(AppRouter.homePageOne);
     }else{
       showSnackbar(context,respons.errorMessage);
